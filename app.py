@@ -57,5 +57,33 @@ questions = [
 
 st.title("🧠 Quiz de Machine Learning (Nivel Básico)")
 
+# Seleccionar 5 preguntas aleatorias
+selected_questions = random.sample(questions, 5)
+
+user_answers = []
+score = 0
+
+# Mostrar preguntas
+for i, q in enumerate(selected_questions):
+    st.subheader(f"Pregunta {i+1}: {q['question']}")
+    answer = st.radio("Selecciona una opción:", q["options"], key=i)
+    user_answers.append((q, answer))
+
+# Botón para enviar respuestas
+if st.button("Enviar respuestas"):
+    correct = 0
+    for q, ans in user_answers:
+        if ans == q["answer"]:
+            correct += 1
+
+    st.write(f"Tu puntaje: {correct}/{len(selected_questions)}")
+
+    if correct == len(selected_questions):
+        st.success("¡Excelente! Todas correctas 🎉")
+        st.balloons()  # Animación de celebración
+    else:
+        st.warning("Sigue practicando, ¡vas muy bien!")
+
+
 # Seleccionar 5 preguntas
 
