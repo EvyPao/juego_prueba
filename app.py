@@ -66,7 +66,12 @@ score = 0
 # Mostrar preguntas
 for i, q in enumerate(selected_questions):
     st.subheader(f"Pregunta {i+1}: {q['question']}")
-    answer = st.radio("Selecciona una opción:", q["options"], key=i)
+    answer = st.radio(
+        "Selecciona una opción:",
+        q["options"],
+        key=i,
+        index=None  # 🔧 evita que haya una opción marcada por defecto
+    )
     user_answers.append((q, answer))
 
 # Botón para enviar respuestas
@@ -85,5 +90,4 @@ if st.button("Enviar respuestas"):
         st.warning("Sigue practicando, ¡vas muy bien!")
 
 
-# Seleccionar 5 preguntas
 
