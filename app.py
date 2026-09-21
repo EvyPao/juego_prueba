@@ -69,10 +69,16 @@ for i, q in enumerate(selected_questions):
     answer = st.radio(
         "Selecciona una opción:",
         q["options"],
-        key=i,
-        index=None  # 🔧 evita que haya una opción marcada por defecto
+        key=f"respuesta_{i}",
+        index=None  # evita que aparezca marcada por defecto
     )
     user_answers.append((q, answer))
+
+# 🔄 Botón para reiniciar el quiz
+if st.button("Nuevo Quiz"):
+    for i in range(len(selected_questions)):
+        st.session_state[f"respuesta_{i}"] = None
+    st.experimental_rerun()
 
 # Botón para enviar respuestas
 if st.button("Enviar respuestas"):
